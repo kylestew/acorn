@@ -16,6 +16,7 @@ export {
     Rectangle,
     rectangle,
 } from './geo/shapes'
+export { Grid } from './geo/extended/grid'
 
 /* === OPS === */
 // all ops take geo data as the first argument and are threadable
@@ -49,17 +50,14 @@ export {
 } from './geo/ops'
 
 // acorn.env('sketch-2d', { width: 800, height: 800, range: [-1, 1] })
+import { createCanvas } from './canvas-utils/canvas-util'
+
 export function env(type, params) {
     const { width, height, range } = params
-    console.log('ENV', type, width, height, range)
-}
+    const ctx = createCanvas(width, height)
+    ctx.setRange(range[0], range[1])
 
-/*
-            const ctx = createCanvas(1200, 1200)
-        // const ctx = createCanvas(1200 * 2, 1200 * 2)
-        // const ctx = createCanvas(1080 * 2.0, 1920 * 2.0)
-        ctx.setRange(-1.0, 1.0)
-        ctx.clear(background)
-        console.log('RUNNING EXAMPLE', fn.name)
-        fn(ctx, selectedPalette)
-        */
+    console.log('ENV', type, width, height, range, ctx)
+    acorn.draw = ctx.draw
+    acorn.clear = ctx.clear
+}

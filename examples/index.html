@@ -8,35 +8,28 @@
     <body>
         <script src="../dist/acorn.js"></script>
         <script>
-            // import { Line } from '../tools/geo/'
-            // import { asPoints } from '../tools/geo/ops'
-            // import { Grid } from '../tools/geo/extended'
-            // import { draw } from '../tools/draw'
+            acorn.env('sketch-2d', { width: 600, height: 600, range: [-1, 1] })
 
-            // TODO: setup environment - basic JS, canvas, etc.
-            acorn.env('sketch-2d', { width: 800, height: 800, range: [-1, 1] })
+            //     const { background, primary, secondary, accent, dark, neutral } = palette
+            const bg = 'orange'
+            const primary = 'red'
+
+            acorn.clear(bg)
+
+            const probability = 0.5
 
             // generate grid cells
             const cellCount = 12
             const grid = new acorn.Grid([-1, -1], [2, 2], cellCount, cellCount)
 
-            // const line = new acorn.Line([0, 0], [1, 1])
-            // console.log(line)
+            // for each grid cell, randomly pick a diagonal line across it (forward or backward)
+            const lines = grid.rects().map((rect) => {
+                let [a, b, c, d] = acorn.asPoints(rect)
+                const pts = Math.random() <= probability ? [a, c] : [b, d]
+                return new acorn.Line(pts)
+            })
 
-            // export function goto10(ctx, palette) {
-            //     const { background, primary, secondary, accent, dark, neutral } = palette
-
-            //     const probability = 0.5
-
-            //     // for each grid cell, randomly pick a diagonal line across it (forward or backward)
-            //     const lines = grid.rects().map((rect) => {
-            //         let [a, b, c, d] = asPoints(rect)
-            //         const pts = Math.random() <= probability ? [a, c] : [b, d]
-            //         return new Line(pts)
-            //     })
-
-            //     draw(ctx, lines, { stroke: primary, lineCap: 'round', weight: 0.03 })
-            // }
+            acorn.draw(lines, { stroke: primary, lineCap: 'round', weight: 0.03 })
         </script>
     </body>
 </html>
