@@ -1,0 +1,13 @@
+{
+    "name": "acorn",
+    "version": "1.0.0",
+    "description": "My JavaScript library",
+    "main": "dist/acorn.js",
+    "scripts": {
+        "build": "webpack"
+    },
+    "devDependencies": {
+        "webpack": "^5.38.1",
+        "webpack-cli": "^4.7.2"
+    }
+}
