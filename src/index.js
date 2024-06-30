@@ -49,6 +49,9 @@ export {
     withAttribs, // shallow copy of given shape with new attribs assigned
 } from './geo/ops'
 
+export { random, randomInt, randomBool, pickRandom } from './random'
+
+import { selectedPalette } from './color/palettes'
 // acorn.env('sketch-2d', { width: 800, height: 800, range: [-1, 1] })
 import { createCanvas } from './canvas-utils/canvas-util'
 
@@ -58,6 +61,8 @@ export function env(type, params) {
     ctx.setRange(range[0], range[1])
 
     console.log('ENV', type, width, height, range, ctx)
-    acorn.draw = ctx.draw
-    acorn.clear = ctx.clear
+    window.draw = ctx.draw
+    window.clear = ctx.clear
+
+    window.palette = selectedPalette
 }

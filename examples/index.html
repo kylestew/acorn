@@ -8,28 +8,25 @@
     <body>
         <script src="../dist/acorn.js"></script>
         <script>
-            acorn.env('sketch-2d', { width: 600, height: 600, range: [-1, 1] })
+            env('sketch-2d', { width: 600, height: 600, range: [-1, 1] })
 
-            //     const { background, primary, secondary, accent, dark, neutral } = palette
-            const bg = 'orange'
-            const primary = 'red'
+            const { background, primary, secondary, accent, dark, neutral } = palette
+            clear(background)
 
-            acorn.clear(bg)
-
-            const probability = 0.5
+            const probability = 0.333
 
             // generate grid cells
             const cellCount = 12
-            const grid = new acorn.Grid([-1, -1], [2, 2], cellCount, cellCount)
+            const grid = new Grid([-1, -1], [2, 2], cellCount, cellCount)
 
             // for each grid cell, randomly pick a diagonal line across it (forward or backward)
             const lines = grid.rects().map((rect) => {
-                let [a, b, c, d] = acorn.asPoints(rect)
-                const pts = Math.random() <= probability ? [a, c] : [b, d]
-                return new acorn.Line(pts)
+                let [a, b, c, d] = asPoints(rect)
+                const pts = randomBool(probability) ? [a, c] : [b, d]
+                return new Line(pts)
             })
 
-            acorn.draw(lines, { stroke: primary, lineCap: 'round', weight: 0.03 })
+            draw(lines, { stroke: primary, lineCap: 'round', weight: 0.03 })
         </script>
     </body>
 </html>

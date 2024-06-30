@@ -5,9 +5,9 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'acorn.js',
-        // libraryTarget: window, // Expose exports directly to the window object
-        library: 'acorn',
-        globalObject: 'this',
+        libraryTarget: 'window', // Expose exports directly to the window object
+        // library: 'acorn',
+        // globalObject: 'this',
     },
 
     resolve: {
