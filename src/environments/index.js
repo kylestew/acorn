@@ -1,24 +1,29 @@
 import { createCanvas } from '../canvas-utils/canvas-util'
 
-// import { selectedPalette } from './color/palettes'
-
-export function installFunctionToEnv(fn, docs = undefined) {
+export function installFunctionOnEnv(fn, namespace = undefined, docs = undefined) {
     if (typeof fn !== 'function') {
         console.warn(`Attempted to install non-function: ${fn}`)
         return
     }
-    window[fn.name] = fn
+
+    // don't clobber existing methods
+    if (!window.hasOwnProperty(fn.name)) {
+        window[fn.name] = fn
+    } else {
+        console.error('Environment already has a function named', fn.name)
+        return
+    }
 
     if (!Array.isArray(window.doc_keys)) {
         window.doc_keys = []
     }
     window.doc_keys.push(fn.name)
 
+    fn.namespace = namespace || fn.namespace || 'void'
     fn.docs = docs || fn.docs || 'No documentation available.'
 }
-
-export function installModuleToEnv(module) {
-    Object.keys(module).forEach((key) => installFunctionToEnv(module[key]))
+export function installModuleOnEnv(module, namespace) {
+    Object.keys(module).forEach((key) => installFunctionOnEnv(module[key], namespace))
 }
 
 export function displayEnv() {
@@ -26,10 +31,13 @@ export function displayEnv() {
     window.doc_keys.forEach((key) => {
         if (window.hasOwnProperty(key)) {
             const fn = window[key]
-            console.log(`${fn.name}: ${fn.docs}`)
+            console.log(`[${fn.namespace}] ${fn.name}: ${fn.docs}`)
         }
     })
 }
+
+// import { selectedPalette } from './color/palettes'
+import { installOnEnv as installOnEnv_Geom } from './env_geom'
 
 export function env(type, params) {
     const { width, height, range } = params
@@ -38,13 +46,16 @@ export function env(type, params) {
 
     console.log('ENV', type, width, height, range, ctx)
 
+    // install some methods and variables on environment
     const myDraw = ctx.draw
     Object.defineProperty(myDraw, 'name', { value: 'draw' })
-    installFunctionToEnv(myDraw, 'Draws objects to the canvas.')
+    installFunctionOnEnv(myDraw, 'draw', 'Draws objects to the canvas.')
 
     const myClear = ctx.clear
     Object.defineProperty(myClear, 'name', { value: 'clear' })
-    installFunctionToEnv(myClear, 'Clears the canvas.')
+    installFunctionOnEnv(myClear, 'draw', 'Clears the canvas.')
+
+    installOnEnv_Geom(installFunctionOnEnv)
 
     // window.palette = selectedPalette
 }
