@@ -1,5 +1,12 @@
+export { env, displayEnv } from './environments/index'
+import { installModuleToEnv } from './environments/index'
+
+/* === STANDARD LIBRARY ===*/
+import * as randomLib from './random'
+installModuleToEnv(randomLib)
+
 /* === TYPES === */
-export {
+import {
     // Arc,
     // Circle,
     // circle,
@@ -16,11 +23,11 @@ export {
     // Rectangle,
     // rectangle,
 } from './geo/shapes'
-export { Grid } from './geo/extended/grid'
+import { Grid } from './geo/extended/grid'
 
 /* === OPS === */
 // all ops take geo data as the first argument and are threadable
-export {
+import {
     // area,
     // asPath, // convert shape to Path2D
     asPoints, // convert shape to its vertices
@@ -48,21 +55,3 @@ export {
     // translate,
     // withAttribs, // shallow copy of given shape with new attribs assigned
 } from './geo/ops'
-
-export { random, randomInt, randomBool, pickRandom } from './random'
-
-import { selectedPalette } from './color/palettes'
-
-import { createCanvas } from './canvas-utils/canvas-util'
-
-export function env(type, params) {
-    const { width, height, range } = params
-    const ctx = createCanvas(width, height)
-    ctx.setRange(range[0], range[1])
-
-    console.log('ENV', type, width, height, range, ctx)
-    window.draw = ctx.draw
-    window.clear = ctx.clear
-
-    window.palette = selectedPalette
-}
