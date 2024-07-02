@@ -3,4 +3,4 @@ import { installModuleOnEnv } from './environments/index'
 
 /* === STANDARD LIBRARY ===*/
 import * as randomLib from './random'
-installModuleOnEnv(randomLib, 'std.random')
+installModuleOnEnv(randomLib, 'std.random', 'random/index.js')

@@ -13,9 +13,6 @@
 
             displayEnv()
 
-            console.log(random(0, 1))
-            clear('orange')
-
             // likelihood of a backslash instead of a forward one
             const probability = 0.333
 
@@ -23,15 +20,15 @@
             const cellCount = 12
             const grid = new Grid([-1, -1], [2, 2], cellCount, cellCount)
 
-            // // for each grid cell, randomly pick a diagonal line across it (forward or backward)
-            // const lines = grid.rects().map((rect) => {
-            //     let [a, b, c, d] = asPoints(rect)
-            //     const pts = randomBool(probability) ? [a, c] : [b, d]
-            //     return new Line(pts)
-            // })
+            // for each grid cell, randomly pick a diagonal line across it (forward or backward)
+            const lines = grid.rects().map((rect) => {
+                let [a, b, c, d] = asPoints(rect)
+                const pts = randomBool(probability) ? [a, c] : [b, d]
+                return new Line(pts)
+            })
 
-            // clear(palette.background)
-            // draw(lines, { stroke: palette.primary, lineCap: 'round', weight: 0.03 })
+            clear(palette.background)
+            draw(lines, { stroke: palette.primary, lineCap: 'round', weight: 0.03 })
         </script>
         <a href="https://10print.org/">10print.org</a>
     </body>

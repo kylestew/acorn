@@ -11,6 +11,8 @@
         <script>
             env('sketch-2d', { width: 800, height: 800, range: [-1, 1] })
 
+            displayEnv()
+
             // create a grid of positions
             const cellCount = 24
             const grid = new Grid([-0.9, 0.9], [1.8, -1.8], cellCount, cellCount)

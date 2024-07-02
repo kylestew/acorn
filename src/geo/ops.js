@@ -1,4 +1,5 @@
-import { Arc, Circle, Ellipse, Line, Polygon, Polyline, Rectangle, Ray, Quadratic } from './shapes'
+import { Line } from './shapes/Line'
+import { Arc, Circle, Ellipse, Polygon, Polyline, Rectangle, Ray, Quadratic } from './shapes'
 // import { random, randomPoint } from '../random'
 // import { neg, sub, subN, mulN, normalize } from '../math/vectors'
 // import { wrapSides, partition } from '../array'

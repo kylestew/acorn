@@ -1,21 +1,23 @@
 /* === TYPES === */
-import {
-    // Arc,
-    // Circle,
-    // circle,
-    // // (Cubic)
-    // Ellipse,
-    // // (Group)
-    Line,
-    // line,
-    // // Path
-    // Polygon,
-    // Polyline,
-    // Quadratic,
-    // Ray,
-    // Rectangle,
-    // rectangle,
-} from '../geo/shapes'
+// import {
+//     // Arc,
+//     // Circle,
+//     // circle,
+//     // // (Cubic)
+//     // Ellipse,
+//     // // (Group)
+//     // Line,
+//     // line,
+//     // // Path
+//     // Polygon,
+//     // Polyline,
+//     // Quadratic,
+//     // Ray,
+//     // Rectangle,
+//     // rectangle,
+// } from '../geo/shapes'
+
+import { Line } from '../geo/shapes/Line'
 import { Grid } from '../geo/extended/grid'
 
 /* === OPS === */
@@ -36,7 +38,7 @@ import {
     // intersects, // pairwise shape intersection (various types)
     // normalAt,
     // offset, // shape/path offsetting
-    // pointAt, // compute point on shape boundary at parametric position
+    pointAt, // compute point on shape boundary at parametric position
     // pointInside, // check if point inside shape
     // resample, // resample/convert shape
     // rotate,
@@ -49,10 +51,26 @@ import {
     // withAttribs, // shallow copy of given shape with new attribs assigned
 } from '../geo/ops'
 
+import { selectedPalette } from '../color/palettes'
+
 export function installOnEnv(installFn) {
-    installFn(Line, 'geo', 'Line([pt1, pt2], attribs={}) :: A line segment.')
+    installFn(Line, 'geo', 'geo/shapes/Line.js', 'Line([pt1, pt2], attribs={}) :: A line segment.')
 
-    // src/geo/extended/grid.js
+    installFn(
+        Grid,
+        'geo',
+        'geo/extended/grid.js',
+        'Grid([pos], [size], rows, cols) :: A grid object with helper methods.'
+    )
 
-    installFn(Grid, 'geo', 'Grid([pos], [size], rows, cols) :: A grid object with helper methods.')
+    installFn(
+        asPoints,
+        'geo.ops',
+        'geo/ops.js',
+        "asPoints(shape, num) :: Samples vertices from a given shape's boundary"
+    )
+    installFn(pointAt, 'geo.ops', 'geo/ops.js', 'pointAt(shape, t) :: Samples a point on the boundary of a shape')
+
+    selectedPalette.name = 'palette'
+    installFn(selectedPalette, 'assets', 'color/palettes.js')
 }
