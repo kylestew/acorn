@@ -59,10 +59,10 @@ export function env(type, params) {
     Object.defineProperty(myClear, 'name', { value: 'clear' })
     installFunctionOnEnv(myClear, 'draw', 'draw/index.js', 'Clears the canvas.')
 
+    // geometry objects and ops
+    installOnEnv_Geom(installFunctionOnEnv)
+
     // install randomized palette
     selectedPalette.name = 'palette'
     installFunctionOnEnv(selectedPalette, 'assets', 'color/palettes.js')
-
-    // geometry objects and ops
-    installOnEnv_Geom(installFunctionOnEnv)
 }

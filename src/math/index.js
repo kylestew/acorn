@@ -58,17 +58,19 @@ export { mapRange }
  * clamp - clamps a value between a minimum and maximum
  */
 
-// /**
-//  * Linearly interpolates between two points.
-//  *
-//  * @param {number[]} pt1 - The first point.
-//  * @param {number[]} pt2 - The second point.
-//  * @param {number} pct - The interpolation percentage (between 0 and 1).
-//  * @returns {number[]} The interpolated point.
-//  */
-// export function lerpPt(pt1, pt2, pct) {
-//     return [pt1[0] + (pt2[0] - pt1[0]) * pct, pt1[1] + (pt2[1] - pt1[1]) * pct]
-// }
+/**
+ * Linearly interpolates between two points.
+ *
+ * @param {number[]} pt1 - The first point.
+ * @param {number[]} pt2 - The second point.
+ * @param {number} pct - The interpolation percentage (between 0 and 1).
+ * @returns {number[]} The interpolated point.
+ */
+function lerpPt(pt1, pt2, pct) {
+    return [pt1[0] + (pt2[0] - pt1[0]) * pct, pt1[1] + (pt2[1] - pt1[1]) * pct]
+}
+lerpPt.docs = 'lerpPt(pt1, pt2, pct) :: Linearly interpolates between two points.'
+export { lerpPt }
 
 // /**
 //  * Calculates the midpoint between two points.

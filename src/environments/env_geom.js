@@ -11,7 +11,6 @@ import { Grid } from '../geo/extended/grid'
 import {
     // area,
     // asPath, // convert shape to Path2D
-    asPoints, // convert shape to its vertices
     // asPolygon, // convert shape to polygon(s)
     // // asPolyline - convert shape to polyline(s)
     // bounds,
@@ -36,6 +35,7 @@ import {
     // translate,
     // withAttribs, // shallow copy of given shape with new attribs assigned
 } from '../geo/ops'
+import { asPoints } from '../geo/ops/asPoints'
 
 export function installOnEnv(installFn) {
     installFn(Line, 'geo', 'geo/shapes/Line.js', 'Line([pt1, pt2], attribs={}) :: A line segment.')
@@ -54,7 +54,7 @@ export function installOnEnv(installFn) {
     installFn(
         asPoints,
         'geo.ops',
-        'geo/ops.js',
+        'geo/ops/asPoints.js',
         "asPoints(shape, num) :: Samples vertices from a given shape's boundary"
     )
     installFn(pointAt, 'geo.ops', 'geo/ops.js', 'pointAt(shape, t) :: Samples a point on the boundary of a shape')

@@ -1,8 +1,6 @@
 // /**
 //  * === Array Utils ===
 //  *
-//  * full(count, callbackOrValue) - Prefills a new array with values returned by a callback function or a provided value.
-//  * linspace(start, stop, num, endpoint) - Generates an array of numbers within a specified range.
 //  * range(from, to, step) - Generates an array of numbers within a specified range.
 //  * range2d(xRange, yRange, stepX, stepY) - Generates a 2D range array based on the given x and y ranges.
 //  * partition(data, size, step, partial) - Creates overlapping and non-overlapping sliding windows of inputs.
@@ -12,42 +10,48 @@
 //  * takeEvery(array, n) - Takes every nth element from an array and returns a new array.
 //  */
 
-// /**
-//  * Prefills a new array with values returned by a callback function or a provided value.
-//  *
-//  * @param {number} count - The number of elements to prefill the array with.
-//  * @param {Function|any} callbackOrValue - The callback function or value that returns the value for each element.
-//  * @returns {Array} - The prefilled array.
-//  */
-// export function full(count, callbackOrValue) {
-//     const result = []
-//     for (let i = 0; i < count; i++) {
-//         if (typeof callbackOrValue === 'function') {
-//             result.push(callbackOrValue())
-//         } else {
-//             result.push(callbackOrValue)
-//         }
-//     }
-//     return result
-// }
+/**
+ * Prefills a new array with values returned by a callback function or a provided value.
+ *
+ * @param {number} count - The number of elements to prefill the array with.
+ * @param {Function|any} callbackOrValue - The callback function or value that returns the value for each element.
+ * @returns {Array} - The prefilled array.
+ */
+function full(count, callbackOrValue) {
+    const result = []
+    for (let i = 0; i < count; i++) {
+        if (typeof callbackOrValue === 'function') {
+            result.push(callbackOrValue())
+        } else {
+            result.push(callbackOrValue)
+        }
+    }
+    return result
+}
+full.docs =
+    'full(count, callbackOrValue) :: Prefills a new array with values (either returned by callback function or one provided value).'
+export { full }
 
-// /**
-//  * Generates N evenly spaced numbers within a specified range.
-//  *
-//  * @param {number} start - The starting value of the range.
-//  * @param {number} stop - The ending value of the range.
-//  * @param {number} num - The number of elements in the range.
-//  * @param {boolean} [endpoint=true] - Whether or not to include the endpoint in the range.
-//  * @returns {Array} - The generated range array.
-//  */
-// export function linspace(start, stop, num, endpoint = true) {
-//     const step = (stop - start) / (num - (endpoint ? 1 : 0))
-//     const result = []
-//     for (let i = 0; i < num; i++) {
-//         result.push(start + i * step)
-//     }
-//     return result
-// }
+/**
+ * Generates N evenly spaced numbers within a specified range.
+ *
+ * @param {number} start - The starting value of the range.
+ * @param {number} stop - The ending value of the range.
+ * @param {number} num - The number of elements in the range.
+ * @param {boolean} [endpoint=true] - Whether or not to include the endpoint in the range.
+ * @returns {Array} - The generated range array.
+ */
+function linspace(start, stop, num, endpoint = true) {
+    const step = (stop - start) / (num - (endpoint ? 1 : 0))
+    const result = []
+    for (let i = 0; i < num; i++) {
+        result.push(start + i * step)
+    }
+    return result
+}
+linspace.docs =
+    'linspace(start, stop, num, endpoint = true) :: Generates `num` evenly spaced numbers within a specified range.'
+export { linspace }
 
 // /**
 //  * Generates an array of numbers within a specified range using a step size.

@@ -26,19 +26,23 @@ export { random }
  * @param {number} max - The maximum value (exclusive).
  * @returns {number} The random integer generated.
  */
-export function randomInt(min, max) {
+function randomInt(min, max) {
     const minCeiled = Math.ceil(min)
     const maxFloored = Math.floor(max)
     return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled) // The maximum is exclusive and the minimum is inclusive
 }
+randomInt.docs = 'randomInt(min, max) :: Returns a random integer between `min` and `max`.'
+export { randomInt }
 
 /**
  * Generates a random boolean value.
  * @returns {boolean} A random boolean value.
  */
-export function randomBool(probability = 0.5) {
+function randomBool(probability = 0.5) {
     return Math.random() < probability
 }
+randomBool.docs = 'randomBool(probability = 0.5) :: Returns a random coin toss.'
+export { randomBool }
 
 /**
  * Picks a random unique element or elements from an array.
@@ -47,7 +51,7 @@ export function randomBool(probability = 0.5) {
  * @param {number} [num=1] - The number of elements to pick. Defaults to 1 if not provided.
  * @returns {Array} - An array containing the randomly picked unique element(s).
  */
-export function pickRandom(arr, num = 1) {
+function pickRandom(arr, num = 1) {
     if (arr.length === 0) {
         throw new Error('Array is empty')
     }
@@ -67,40 +71,46 @@ export function pickRandom(arr, num = 1) {
     }
     return pickedElements
 }
+pickRandom.docs = 'pickRandom(arr, num = 1) :: Returns a random number of elements from given array.'
+export { pickRandom }
 
-// /**
-//  * Generates a random point within a specified range.
-//  *
-//  * @param {Array<number>} [min=[0, 0]] - The minimum values for x and y coordinates.
-//  * @param {Array<number>} [max=[1, 1]] - The maximum values for x and y coordinates.
-//  * @returns {Array<number>} The randomly generated point as an array of [x, y] coordinates.
-//  */
-// export function randomPoint(min = [0, 0], max = [1, 1]) {
-//     if (arguments.length === 1) {
-//         // assume the user passed in a max value
-//         max = min
-//         min = [0, 0] // Set min to the origin if only one argument is provided
-//     }
+/**
+ * Generates a random point within a specified range.
+ *
+ * @param {Array<number>} [min=[0, 0]] - The minimum values for x and y coordinates.
+ * @param {Array<number>} [max=[1, 1]] - The maximum values for x and y coordinates.
+ * @returns {Array<number>} The randomly generated point as an array of [x, y] coordinates.
+ */
+function randomPoint(min = [0, 0], max = [1, 1]) {
+    if (arguments.length === 1) {
+        // assume the user passed in a max value
+        max = min
+        min = [0, 0] // Set min to the origin if only one argument is provided
+    }
 
-//     // Return a random point where each component is calculated separately
-//     const x = Math.random() * (max[0] - min[0]) + min[0]
-//     const y = Math.random() * (max[1] - min[1]) + min[1]
-//     return [x, y]
-// }
+    // Return a random point where each component is calculated separately
+    const x = Math.random() * (max[0] - min[0]) + min[0]
+    const y = Math.random() * (max[1] - min[1]) + min[1]
+    return [x, y]
+}
+randomPoint.docs = 'randomPoint(min = [0, 0], max = [1, 1]) :: Returns a random point within the specified range.'
+export { randomPoint }
 
-// /**
-//  * Generates a random offset within the specified range.
-//  *
-//  * @param {number} maxX - The maximum value for the X-axis.
-//  * @param {number} [maxY=maxX] - The maximum value for the Y-axis. If not provided, it defaults to the value of maxX.
-//  * @returns {number[]} An array containing the random X and Y offsets.
-//  */
-// export function randomOffset(maxX, maxY) {
-//     if (arguments.length === 1) {
-//         maxY = maxX
-//     }
-//     return [random(-maxX, maxX), random(-maxY, maxY)]
-// }
+/**
+ * Generates a random offset within the specified range.
+ *
+ * @param {number} maxX - The maximum value for the X-axis.
+ * @param {number} [maxY=maxX] - The maximum value for the Y-axis. If not provided, it defaults to the value of maxX.
+ * @returns {number[]} An array containing the random X and Y offsets.
+ */
+function randomOffset(maxX, maxY) {
+    if (arguments.length === 1) {
+        maxY = maxX
+    }
+    return [random(-maxX, maxX), random(-maxY, maxY)]
+}
+randomOffset.docs = 'randomOffset(maxX, maxY = maxX) :: Returns a random offset within the specified range.'
+export { randomOffset }
 
 // /**
 //  * Generates a random element from a target array based on an array of weights.
