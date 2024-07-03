@@ -1,23 +1,9 @@
-/* === TYPES === */
-// import {
-//     // Arc,
-//     // Circle,
-//     // circle,
-//     // // (Cubic)
-//     // Ellipse,
-//     // // (Group)
-//     // Line,
-//     // line,
-//     // // Path
-//     // Polygon,
-//     // Polyline,
-//     // Quadratic,
-//     // Ray,
-//     // Rectangle,
-//     // rectangle,
-// } from '../geo/shapes'
-
+/* === SHAPES === */
 import { Line } from '../geo/shapes/Line'
+import { Rectangle } from '../geo/shapes/Rectangle'
+import { Circle } from '../geo/shapes/Circle'
+import { Polyline } from '../geo/shapes/Polyline'
+import { Polygon } from '../geo/shapes/Polygon'
 import { Grid } from '../geo/extended/grid'
 
 /* === OPS === */
@@ -51,10 +37,12 @@ import {
     // withAttribs, // shallow copy of given shape with new attribs assigned
 } from '../geo/ops'
 
-import { selectedPalette } from '../color/palettes'
-
 export function installOnEnv(installFn) {
     installFn(Line, 'geo', 'geo/shapes/Line.js', 'Line([pt1, pt2], attribs={}) :: A line segment.')
+    installFn(Rectangle, 'geo', 'geo/shapes/Rectangle.js', 'Rectangle(pos, size, attribs={}) :: A rectangle.')
+    installFn(Circle, 'geo', 'geo/shapes/Circle.js', 'Circle(center, r, attribs={}) :: A circle.')
+    installFn(Polyline, 'geo', 'geo/shapes/Polyline.js', 'Polyline(pts, attribs={}) :: A polyline (open polygon).')
+    installFn(Polygon, 'geo', 'geo/shapes/Polygon.js', 'Polygon(pts, attribs={}) :: A closed polygon.')
 
     installFn(
         Grid,
@@ -70,7 +58,4 @@ export function installOnEnv(installFn) {
         "asPoints(shape, num) :: Samples vertices from a given shape's boundary"
     )
     installFn(pointAt, 'geo.ops', 'geo/ops.js', 'pointAt(shape, t) :: Samples a point on the boundary of a shape')
-
-    selectedPalette.name = 'palette'
-    installFn(selectedPalette, 'assets', 'color/palettes.js')
 }

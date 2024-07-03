@@ -1,4 +1,5 @@
-import { Rectangle, Polygon } from '../shapes.js'
+import { Rectangle } from '../shapes/Rectangle.js'
+import { Polygon } from '../shapes/Polygon.js'
 
 export class Grid {
     constructor(pos, size, rows, cols) {

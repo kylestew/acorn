@@ -1,4 +1,4 @@
-import { Circle } from '../geo/shapes'
+import { Circle } from '../geo/shapes/Circle'
 import { asPath } from '../geo/ops'
 
 export function draw(ctx, geo, attribs = {}) {

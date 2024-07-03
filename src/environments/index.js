@@ -1,11 +1,6 @@
 import { createCanvas } from '../canvas-utils/canvas-util'
 
 export function installFunctionOnEnv(fn, namespace = undefined, path = undefined, docs = undefined) {
-    // if (typeof fn !== 'function') {
-    //     console.warn(`Attempted to install non-function: ${fn}`)
-    //     return
-    // }
-
     // don't clobber existing methods
     if (!window.hasOwnProperty(fn.name)) {
         window[fn.name] = fn
@@ -28,7 +23,7 @@ export function installModuleOnEnv(module, namespace, path) {
 }
 
 export function displayEnv() {
-    console.log('Installed Environment:')
+    console.log('ENV', window.acorn_ENV)
     window.doc_keys.forEach((key) => {
         if (window.hasOwnProperty(key)) {
             const fn = window[key]
@@ -39,7 +34,8 @@ export function displayEnv() {
     })
 }
 
-// import { selectedPalette } from './color/palettes'
+import { selectedPalette } from '../color/palettes'
+
 import { installOnEnv as installOnEnv_Geom } from './env_geom'
 
 export function env(type, params) {
@@ -47,7 +43,12 @@ export function env(type, params) {
     const ctx = createCanvas(width, height)
     ctx.setRange(range[0], range[1])
 
-    console.log('ENV', type, width, height, range, ctx)
+    // make a note of environment for debug
+    window.acorn_ENV = {
+        type,
+        ...params,
+        ctx,
+    }
 
     // install some methods and variables on environment
     const myDraw = ctx.draw
@@ -58,7 +59,10 @@ export function env(type, params) {
     Object.defineProperty(myClear, 'name', { value: 'clear' })
     installFunctionOnEnv(myClear, 'draw', 'draw/index.js', 'Clears the canvas.')
 
-    installOnEnv_Geom(installFunctionOnEnv)
+    // install randomized palette
+    selectedPalette.name = 'palette'
+    installFunctionOnEnv(selectedPalette, 'assets', 'color/palettes.js')
 
-    // window.palette = selectedPalette
+    // geometry objects and ops
+    installOnEnv_Geom(installFunctionOnEnv)
 }
