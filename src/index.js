@@ -1,4 +1,6 @@
-export { env, displayEnv } from './environments/index'
+export { env } from './environments/index'
+export { installEnvInfo } from './environments/docs'
+
 import { installModuleOnEnv } from './environments/index'
 
 /* === STANDARD LIBRARY ===*/

@@ -22,18 +22,6 @@ export function installModuleOnEnv(module, namespace, path) {
     Object.keys(module).forEach((key) => installFunctionOnEnv(module[key], namespace, path))
 }
 
-export function displayEnv() {
-    console.log('ENV', window.acorn_ENV)
-    window.doc_keys.forEach((key) => {
-        if (window.hasOwnProperty(key)) {
-            const fn = window[key]
-            console.log(
-                `[${fn.namespace}] ${fn.name}: ${fn.docs} (https://github.com/kylestew/acorn/blob/ether/src/${fn.path})`
-            )
-        }
-    })
-}
-
 import { selectedPalette } from '../color/palettes'
 
 import { installOnEnv as installOnEnv_Geom } from './env_geom'
