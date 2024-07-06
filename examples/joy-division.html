@@ -10,7 +10,8 @@
         <script src="../dist/acorn.js"></script>
         <script id="sketch">
             env('sketch-2d', { width: 900, height: 900, range: [-1, 1] })
-            // displayEnv()
+
+            palette = getPalette()
 
             // make 2 vertical control lines
             const lineA = new Line([-0.9, 0.7], [-0.9, -0.9])

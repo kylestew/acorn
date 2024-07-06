@@ -142,14 +142,14 @@ const palettes = [
     },
 ]
 
-function getColorPalette(index = undefined) {
+function getPalette(index = undefined) {
     if (index) {
         return palettes[index]
     }
     return pickRandom(palettes)
 }
-getColorPalette.docs = {
-    header: 'getColorPalette(index = undefined)',
+getPalette.docs = {
+    header: 'getPalette(index = undefined)',
     body: 'Returns a random color palette from predefined set unless a palette index is defined.',
 }
-export { getColorPalette }
+export { getPalette }

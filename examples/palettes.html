@@ -10,9 +10,8 @@
         <script src="../dist/acorn.js"></script>
         <script id="sketch">
             const { ctx } = env('sketch-2d', { width: 900, height: 900, range: [-1, 1] })
-            installEnvInfo()
 
-            palette = getColorPalette()
+            palette = getPalette()
 
             const colorNames = Object.keys(palette)
             const grid = new Grid([-1, -1], [2, 2], 1, colorNames.length)

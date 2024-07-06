@@ -1,5 +1,4 @@
 export { env } from './environments/index'
-export { installEnvInfo } from './environments/docs'
 export { dbg } from './environments/debug'
 
 import { installModuleOnEnv } from './environments/index'

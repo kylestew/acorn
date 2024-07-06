@@ -24,10 +24,11 @@ export function installModuleOnEnv(module, namespace, path) {
     Object.keys(module).forEach((key) => installFunctionOnEnv(module[key], namespace, path))
 }
 
-import { getColorPalette } from '../color/palettes'
+import { getPalette } from '../color/palettes'
 import { colorUtil } from '../color/colorUtil'
 
 import { installOnEnv as installOnEnv_Geom } from './env_geom'
+import { installEnvInfo } from './docs'
 
 export function env(type, params) {
     const { width, height, range } = params
@@ -58,7 +59,9 @@ export function env(type, params) {
 
     // color utilities
     installFunctionOnEnv(colorUtil, 'color', 'color/colorUtil.js')
-    installFunctionOnEnv(getColorPalette, 'assets', 'color/palettes.js')
+    installFunctionOnEnv(getPalette, 'assets', 'color/palettes.js')
+
+    installEnvInfo()
 
     return window.acorn_ENV
 }

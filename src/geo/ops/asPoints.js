@@ -5,6 +5,8 @@ import { Polyline } from '../shapes/Polyline'
 import { Polygon } from '../shapes/Polygon'
 import { Arc, Ellipse } from '../shapes'
 
+import { resample } from '../ops'
+
 /**
  * Extracts/samples vertices from given shape's boundary and returns them as array.
  *

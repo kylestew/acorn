@@ -11,7 +11,8 @@
         <script id="sketch">
             env('sketch-2d', { width: 900, height: 900, range: [-1, 1] })
 
-            displayEnv()
+            palette = getPalette()
+            dbg(palette)
 
             // likelihood of a backslash instead of a forward one
             const probability = 0.333
