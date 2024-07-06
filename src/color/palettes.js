@@ -42,6 +42,16 @@ const palettes = [
         neutral: '#c9b7a1',
     },
 
+    // Tycho Aus
+    {
+        background: '#323f45',
+        primary: '#09848b',
+        secondary: '#cc645b',
+        accent: '#d47243',
+        dark: '#5e525c',
+        neutral: '#a24e43',
+    },
+
     {
         background: '#e0e4cc',
         primary: '#f38630',
@@ -132,9 +142,14 @@ const palettes = [
     },
 ]
 
-// const selectedPalette = palettes[0]
-const randomPalette = () => pickRandom(palettes)
-const selectedPalette = randomPalette()
-console.log('selected palette', selectedPalette)
-
-export { selectedPalette, randomPalette }
+function getColorPalette(index = undefined) {
+    if (index) {
+        return palettes[index]
+    }
+    return pickRandom(palettes)
+}
+getColorPalette.docs = {
+    header: 'getColorPalette(index = undefined)',
+    body: 'Returns a random color palette from predefined set unless a palette index is defined.',
+}
+export { getColorPalette }

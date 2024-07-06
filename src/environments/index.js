@@ -14,15 +14,18 @@ export function installFunctionOnEnv(fn, namespace = undefined, path = undefined
     }
     window.doc_keys.push(fn.name)
 
-    fn.namespace = namespace || fn.namespace || 'void'
-    fn.path = path || fn.path || '/'
-    fn.docs = docs || fn.docs || 'No documentation available.'
+    if (!Array.isArray(fn)) {
+        fn.namespace = namespace || fn.namespace || 'void'
+        fn.path = path || fn.path || '/'
+        fn.docs = docs || fn.docs || 'No documentation available.'
+    }
 }
 export function installModuleOnEnv(module, namespace, path) {
     Object.keys(module).forEach((key) => installFunctionOnEnv(module[key], namespace, path))
 }
 
-import { selectedPalette } from '../color/palettes'
+import { getColorPalette } from '../color/palettes'
+import { colorUtil } from '../color/colorUtil'
 
 import { installOnEnv as installOnEnv_Geom } from './env_geom'
 
@@ -41,16 +44,21 @@ export function env(type, params) {
     // install some methods and variables on environment
     const myDraw = ctx.draw
     Object.defineProperty(myDraw, 'name', { value: 'draw' })
-    installFunctionOnEnv(myDraw, 'draw', 'draw/index.js', 'Draws objects to the canvas.')
+    installFunctionOnEnv(myDraw, 'draw', 'draw/index.js', {
+        header: 'draw(geo, attribs = {})',
+        body: 'Draws objects to the canvas.',
+    })
 
     const myClear = ctx.clear
     Object.defineProperty(myClear, 'name', { value: 'clear' })
-    installFunctionOnEnv(myClear, 'draw', 'draw/index.js', 'Clears the canvas.')
+    installFunctionOnEnv(myClear, 'draw', 'draw/index.js', { header: 'clear()', body: 'Clears the canvas.' })
 
     // geometry objects and ops
     installOnEnv_Geom(installFunctionOnEnv)
 
-    // install randomized palette
-    selectedPalette.name = 'palette'
-    installFunctionOnEnv(selectedPalette, 'assets', 'color/palettes.js')
+    // color utilities
+    installFunctionOnEnv(colorUtil, 'color', 'color/colorUtil.js')
+    installFunctionOnEnv(getColorPalette, 'assets', 'color/palettes.js')
+
+    return window.acorn_ENV
 }

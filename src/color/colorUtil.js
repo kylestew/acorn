@@ -1,4 +1,4 @@
-export function color(value) {
+function colorUtil(value) {
     // copy out value to detach from original object
     value = JSON.parse(JSON.stringify(value))
 
@@ -194,3 +194,8 @@ export function color(value) {
         },
     }
 }
+colorUtil.docs = {
+    header: 'colorUtil(value)',
+    body: 'Utility function to convert between different color formats.',
+}
+export { colorUtil }
