@@ -15,7 +15,10 @@ function random(min = 0, max = 1) {
     // Return a random number between min and max
     return Math.random() * (max - min) + min
 }
-random.docs = 'random(min = 0, max = 1) :: Returns a random float between `min` and `max`.'
+random.docs = {
+    header: 'random(min = 0, max = 1)',
+    body: 'Returns a random float between `min` and `max`.',
+}
 export { random }
 
 /**
@@ -31,7 +34,10 @@ function randomInt(min, max) {
     const maxFloored = Math.floor(max)
     return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled) // The maximum is exclusive and the minimum is inclusive
 }
-randomInt.docs = 'randomInt(min, max) :: Returns a random integer between `min` and `max`.'
+randomInt.docs = {
+    header: 'randomInt(min, max)',
+    body: 'Returns a random integer between `min` and `max`.',
+}
 export { randomInt }
 
 /**
@@ -41,7 +47,10 @@ export { randomInt }
 function randomBool(probability = 0.5) {
     return Math.random() < probability
 }
-randomBool.docs = 'randomBool(probability = 0.5) :: Returns a random coin toss.'
+randomBool.docs = {
+    header: 'randomBool(probability = 0.5)',
+    body: 'Returns a random boolean value.',
+}
 export { randomBool }
 
 /**
@@ -71,7 +80,10 @@ function pickRandom(arr, num = 1) {
     }
     return pickedElements
 }
-pickRandom.docs = 'pickRandom(arr, num = 1) :: Returns a random number of elements from given array.'
+pickRandom.docs = {
+    header: 'pickRandom(arr, num = 1)',
+    body: 'Returns a random number of elements from given array.',
+}
 export { pickRandom }
 
 /**
@@ -93,7 +105,10 @@ function randomPoint(min = [0, 0], max = [1, 1]) {
     const y = Math.random() * (max[1] - min[1]) + min[1]
     return [x, y]
 }
-randomPoint.docs = 'randomPoint(min = [0, 0], max = [1, 1]) :: Returns a random point within the specified range.'
+randomPoint.docs = {
+    header: 'randomPoint(min = [0, 0], max = [1, 1])',
+    body: 'Returns a random point within the specified range.',
+}
 export { randomPoint }
 
 /**
@@ -109,7 +124,10 @@ function randomOffset(maxX, maxY) {
     }
     return [random(-maxX, maxX), random(-maxY, maxY)]
 }
-randomOffset.docs = 'randomOffset(maxX, maxY = maxX) :: Returns a random offset within the specified range.'
+randomOffset.docs = {
+    header: 'randomOffset(maxX, maxY = maxX)',
+    body: 'Generates a random offset within the specified range.',
+}
 export { randomOffset }
 
 // /**

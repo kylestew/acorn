@@ -10,7 +10,9 @@ export function installEnvInfo() {
                     if (window.hasOwnProperty(key)) {
                         const fn = window[key]
                         return `
-                        <p>[${fn.namespace}] <a href="https://github.com/kylestew/acorn/blob/ether/src/${fn.path}">${fn.name}</a>: ${fn.docs}</p>
+                        <div class="docInfo">
+                        <span class="header"><span class="namespace">[${fn.namespace}]</span> <a href="https://github.com/kylestew/acorn/blob/ether/src/${fn.path}">${fn.name}</a>: ${fn.docs.header}</span><span class="body">${fn.docs.body}</body>
+                        </div>
                     `
                     }
                     return ''

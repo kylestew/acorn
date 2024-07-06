@@ -7,55 +7,78 @@ import { Polygon } from '../geo/shapes/Polygon'
 import { Grid } from '../geo/extended/grid'
 
 /* === OPS === */
-// all ops take geo data as the first argument and are threadable
-import {
-    // area,
-    // asPath, // convert shape to Path2D
-    // asPolygon, // convert shape to polygon(s)
-    // // asPolyline - convert shape to polyline(s)
-    // bounds,
-    // center, // center shape around origin or point
-    // centerRotate, // center shape around origin point
-    // centroid, // computer shape centroid
-    // closestPoint, // find closest point on shape boundary
-    // edges, // extract edges
-    // // fitIntoBounds() - rescale/reposition shapes into a destination boundary
-    // intersects, // pairwise shape intersection (various types)
-    // normalAt,
-    // offset, // shape/path offsetting
-    pointAt, // compute point on shape boundary at parametric position
-    // pointInside, // check if point inside shape
-    // resample, // resample/convert shape
-    // rotate,
-    // scale, // scale shape
-    // scatter,
-    // splitAt, // split shape/boundary at parametric position
-    // tangentAt, // compute tangent at parametric position
-    // // transform() - apply transformation matrix
-    // translate,
-    // withAttribs, // shallow copy of given shape with new attribs assigned
-} from '../geo/ops'
+//  area,
+// asPath, // convert shape to Path2D
+// asPolygon, // convert shape to polygon(s)
+// // asPolyline - convert shape to polyline(s)
+// bounds,
+// center, // center shape around origin or point
+// centerRotate, // center shape around origin point
+// closestPoint, // find closest point on shape boundary
+// edges, // extract edges
+// // fitIntoBounds() - rescale/reposition shapes into a destination boundary
+// intersects, // pairwise shape intersection (various types)
+// normalAt,
+// pointInside, // check if point inside shape
+// resample, // resample/convert shape
+// rotate,
+// scale, // scale shape
+// scatter,
+// splitAt, // split shape/boundary at parametric position
+// tangentAt, // compute tangent at parametric position
+// // transform() - apply transformation matrix
+// translate,
 import { asPoints } from '../geo/ops/asPoints'
+import { centroid } from '../geo/ops/centroid'
+import { offset } from '../geo/ops/offset'
+import { pointAt } from '../geo/ops/pointAt'
+import { withAttribs } from '../geo/ops/withAttribs'
 
 export function installOnEnv(installFn) {
-    installFn(Line, 'geo', 'geo/shapes/Line.js', 'Line([pt1, pt2], attribs={}) :: A line segment.')
-    installFn(Rectangle, 'geo', 'geo/shapes/Rectangle.js', 'Rectangle(pos, size, attribs={}) :: A rectangle.')
-    installFn(Circle, 'geo', 'geo/shapes/Circle.js', 'Circle(center, r, attribs={}) :: A circle.')
-    installFn(Polyline, 'geo', 'geo/shapes/Polyline.js', 'Polyline(pts, attribs={}) :: A polyline (open polygon).')
-    installFn(Polygon, 'geo', 'geo/shapes/Polygon.js', 'Polygon(pts, attribs={}) :: A closed polygon.')
+    // shapes
+    installFn(Line, 'geo', 'geo/shapes/Line.js', {
+        header: 'Line([pt1, pt2], attribs={})',
+        body: 'A line segment.',
+    })
+    installFn(Rectangle, 'geo', 'geo/shapes/Rectangle.js', {
+        header: 'Rectangle(pos, size, attribs={})',
+        body: 'A rectangle.',
+    })
+    installFn(Circle, 'geo', 'geo/shapes/Circle.js', { header: 'Circle(center, r, attribs={})', body: 'A circle.' })
+    installFn(Polyline, 'geo', 'geo/shapes/Polyline.js', {
+        header: 'Polyline(pts, attribs={})',
+        body: 'A polyline (open polygon).',
+    })
+    installFn(Polygon, 'geo', 'geo/shapes/Polygon.js', {
+        header: 'Polygon(pts, attribs={})',
+        body: 'A closed polygon.',
+    })
 
-    installFn(
-        Grid,
-        'geo',
-        'geo/extended/grid.js',
-        'Grid([pos], [size], rows, cols) :: A grid object with helper methods.'
-    )
+    // extended
+    installFn(Grid, 'geo', 'geo/extended/grid.js', {
+        header: 'Grid([pos], [size], rows, cols)',
+        body: 'A grid object with helper methods.',
+    })
 
-    installFn(
-        asPoints,
-        'geo.ops',
-        'geo/ops/asPoints.js',
-        "asPoints(shape, num) :: Samples vertices from a given shape's boundary"
-    )
-    installFn(pointAt, 'geo.ops', 'geo/ops.js', 'pointAt(shape, t) :: Samples a point on the boundary of a shape')
+    // ops
+    installFn(asPoints, 'geo.ops', 'geo/ops/asPoints.js', {
+        header: 'asPoints(shape, num)',
+        body: "Samples vertices from a given shape's boundary",
+    })
+    installFn(centroid, 'geo.ops', 'geo/ops/centroid.js', {
+        header: 'centroid(shape)',
+        body: 'Computes centroid (center point) of given shape',
+    })
+    installFn(offset, 'geo.ops', 'geo/ops/offset.js', {
+        header: 'offset(shape, dist)',
+        body: 'Computes an offset shape (as in "path offsetting") of given shape and offset distance `dist`.',
+    })
+    installFn(pointAt, 'geo.ops', 'geo/ops/pointAt.js', {
+        header: 'pointAt(shape, t)',
+        body: 'Samples a point on the boundary of a shape',
+    })
+    installFn(withAttribs, 'geo.ops', 'geo/ops/withAttribs.js', {
+        header: 'withAttribs(shape, attribs)',
+        body: 'Shallow copy of given shape with new attribs assigned',
+    })
 }

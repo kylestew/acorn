@@ -17,7 +17,7 @@ function mapRange(value, low1, high1, low2, high2) {
     // to scale and shift the value appropriately
     return ratio * (high2 - low2) + low2
 }
-mapRange.docs = 'mapRange(value, low1, high1, low2, high2) :: Maps a value from one range to another.'
+mapRange.docs = { header: 'mapRange(value, low1, high1, low2, high2)', body: 'Maps a value from one range to another.' }
 export { mapRange }
 
 // /**
@@ -69,7 +69,10 @@ export { mapRange }
 function lerpPt(pt1, pt2, pct) {
     return [pt1[0] + (pt2[0] - pt1[0]) * pct, pt1[1] + (pt2[1] - pt1[1]) * pct]
 }
-lerpPt.docs = 'lerpPt(pt1, pt2, pct) :: Linearly interpolates between two points.'
+lerpPt.docs = {
+    header: 'lerpPt(pt1, pt2, pct)',
+    body: 'Linearly interpolates between two points.',
+}
 export { lerpPt }
 
 // /**

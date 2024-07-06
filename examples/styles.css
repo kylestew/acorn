@@ -49,6 +49,19 @@
     width: 80%;
     color: black;
 }
+.docInfo {
+    margin-bottom: 10px;
+}
+.docInfo .header {
+    font-family: monospace;
+}
+.docInfo .body {
+    display: flex;
+    flex-direction: column;
+}
+.docInfo .namespace {
+    font-weight: bold;
+}
 .close {
     color: #aaa;
     float: right;

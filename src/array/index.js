@@ -28,8 +28,10 @@ function full(count, callbackOrValue) {
     }
     return result
 }
-full.docs =
-    'full(count, callbackOrValue) :: Prefills a new array with values (either returned by callback function or one provided value).'
+full.docs = {
+    header: 'full(count, callbackOrValue)',
+    body: 'Prefills a new array with values (either returned by callback function or one provided value).',
+}
 export { full }
 
 /**
@@ -49,8 +51,10 @@ function linspace(start, stop, num, endpoint = true) {
     }
     return result
 }
-linspace.docs =
-    'linspace(start, stop, num, endpoint = true) :: Generates `num` evenly spaced numbers within a specified range.'
+linspace.docs = {
+    header: 'linspace(start, stop, num, endpoint = true)',
+    body: 'Generates `num` evenly spaced numbers within a specified range.',
+}
 export { linspace }
 
 // /**
@@ -283,7 +287,10 @@ function interleave(array1, array2) {
 
     return result
 }
-interleave.docs = 'interleave(array1, array2) :: Interleaves two arrays by alternating their elements.'
+interleave.docs = {
+    header: 'interleave(array1, array2)',
+    body: 'Interleaves two arrays by alternating their elements.',
+}
 export { interleave }
 
 /**
@@ -303,7 +310,10 @@ function zip(...arrays) {
 
     return zipped
 }
-zip.docs = 'zip(arr1, arr2, ...) :: Zips two or more arrays together, creating an array of pairs (tuples, etc).'
+zip.docs = {
+    header: 'zip(arr1, arr2, ...)',
+    body: 'Zips two or more arrays together, creating an array of pairs (tuples, etc).',
+}
 export { zip }
 
 // /**

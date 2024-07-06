@@ -10,7 +10,7 @@
         <script src="../dist/acorn.js"></script>
         <script id="sketch">
             env('sketch-2d', { width: 900, height: 900, range: [-1, 1] })
-            displayEnv()
+            installEnvInfo()
 
             // create a grid
             const grid = new Grid([-1, -1], [2, 2], 8, 8)
@@ -29,16 +29,19 @@
                     const trx = lerpPt([0, 0], randOffset, pct)
                     // rect inset by size and translated by lerped offset
                     // const newRect = translate(offset(rect, -size), trx)
-                    // if (pct > 0.8) {
-                    //     return withAttribs(newRect, { stroke: secondary, weight: 0.01 })
-                    // } else {
-                    //     return withAttribs(newRect, { stroke: primary, weight: 0.01 })
-                    // }
+                    const newRect = offset(rect, -size)
+                    if (pct > 0.8) {
+                        return withAttribs(newRect, { stroke: palette.secondary, weight: 0.01 })
+                    } else {
+                        return withAttribs(newRect, { stroke: palette.primary, weight: 0.01 })
+                    }
                 })
             )
 
+            dbg(squares.length)
+
             clear(palette.background)
-            // draw(squares, { stroke: palette.primary, weight: 0.01 })
+            draw(squares, { stroke: palette.primary, weight: 0.01 })
         </script>
         <a href="https://generativeartistry.com/tutorials/hypnotic-squares/">generativeartistry.com</a>
     </body>
