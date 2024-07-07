@@ -4,9 +4,7 @@ import { Rectangle } from '../geo/shapes/Rectangle'
 import { Circle } from '../geo/shapes/Circle'
 import { Polyline } from '../geo/shapes/Polyline'
 import { Polygon } from '../geo/shapes/Polygon'
-// extended
-import { Grid } from '../geo/extended/grid'
-import { Sprite } from '../geo/extended/sprite'
+import { Grid } from '../geo/shapes/Grid'
 
 /* === OPS === */
 //  area,
@@ -55,15 +53,9 @@ export function installOnEnv(installFn) {
         header: 'Polygon(pts, attribs={})',
         body: 'A closed polygon.',
     })
-
-    // extended
-    installFn(Grid, 'geo', 'geo/extended/grid.js', {
+    installFn(Grid, 'geo', 'geo/shapes/Grid.js', {
         header: 'Grid([pos], [size], rows, cols)',
         body: 'A grid object with helper methods.',
-    })
-    installFn(Sprite, 'geo', 'geo/extended/sprite.js', {
-        header: 'async Sprite.create(src)',
-        body: 'Creates a new sprite object from an image source (loads async).',
     })
 
     // ops

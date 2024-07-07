@@ -1,5 +1,5 @@
 import { Circle } from '../geo/shapes/Circle'
-import { Sprite } from '../geo/extended/sprite'
+import { Sprite } from '../extended/sprite'
 import { asPath } from '../geo/ops/asPath'
 
 export function draw(ctx, geo, attribs = {}) {

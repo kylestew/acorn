@@ -10,6 +10,7 @@
         <script src="../dist/acorn.js"></script>
         <script id="sketch">
             const { ctx } = env('sketch-2d', { width: 900, height: 900, range: [-1, 1] })
+            ext.sprite()
             const palette = getPalette()
 
             async function sketch() {
