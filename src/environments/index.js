@@ -31,12 +31,14 @@ import { installOnEnv as installOnEnv_Geom } from './env_geom'
 import { installEnvInfo } from './docs'
 
 export function env(type, params) {
+    // TODO: support other `type`s
+
     const { width, height, range } = params
     const ctx = createCanvas(width, height)
     ctx.setRange(range[0], range[1])
 
     // make a note of environment for debug
-    window.acorn_ENV = {
+    const envInfo = {
         type,
         ...params,
         ctx,
@@ -54,6 +56,39 @@ export function env(type, params) {
     Object.defineProperty(myClear, 'name', { value: 'clear' })
     installFunctionOnEnv(myClear, 'draw', 'draw/index.js', { header: 'clear()', body: 'Clears the canvas.' })
 
+    const clip = (...params) => ctx.clip(...params)
+    installFunctionOnEnv(
+        clip,
+        'draw',
+        'https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip',
+        {
+            header: 'clip()',
+            body: 'Turns the current or given path into the current clipping region. The previous clipping region, if any, is intersected with the current or given path to create the new clipping region.',
+        }
+    )
+
+    const save = () => ctx.save()
+    installFunctionOnEnv(
+        save,
+        'draw',
+        'https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/save',
+        {
+            header: 'save()',
+            body: 'Saves the entire state of the canvas by pushing the current state onto a stack.',
+        }
+    )
+
+    const restore = () => ctx.restore()
+    installFunctionOnEnv(
+        restore,
+        'draw',
+        'https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/restore',
+        {
+            header: 'restore()',
+            body: 'Restores the most recently saved canvas state by popping the top entry in the drawing state stack.',
+        }
+    )
+
     // geometry objects and ops
     installOnEnv_Geom(installFunctionOnEnv)
 
@@ -61,7 +96,8 @@ export function env(type, params) {
     installFunctionOnEnv(colorUtil, 'color', 'color/colorUtil.js')
     installFunctionOnEnv(getPalette, 'assets', 'color/palettes.js')
 
-    installEnvInfo()
+    // environment info modal
+    installEnvInfo(envInfo)
 
-    return window.acorn_ENV
+    return envInfo
 }

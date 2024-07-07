@@ -1,6 +1,6 @@
 import { Circle } from '../geo/shapes/Circle'
 import { Sprite } from '../geo/extended/sprite'
-import { asPath } from '../geo/ops'
+import { asPath } from '../geo/ops/asPath'
 
 export function draw(ctx, geo, attribs = {}) {
     // if an array, run draw on each element

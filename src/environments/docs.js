@@ -1,17 +1,28 @@
-export function installEnvInfo() {
+export function installEnvInfo(envInfo) {
+    function formatURL(path) {
+        if (path.startsWith('http')) {
+            return path
+        } else {
+            return 'https://github.com/kylestew/acorn/blob/ether/src/' + path
+        }
+    }
     const modalHTML = `
     <div id="environmentInfoModal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Current Acorn Environment</h2>
-            <h5>${JSON.stringify(window.acorn_ENV, null, 2)}</h5>
+            <h5>${JSON.stringify(envInfo, null, 2)}</h5>
             ${window.doc_keys
                 .map((key) => {
                     if (window.hasOwnProperty(key)) {
                         const fn = window[key]
                         return `
                         <div class="docInfo">
-                        <span class="header"><span class="namespace">[${fn.namespace}]</span> <a href="https://github.com/kylestew/acorn/blob/ether/src/${fn.path}">${fn.name}</a>: ${fn.docs.header}</span><span class="body">${fn.docs.body}</body>
+                        <span class="header"><span class="namespace">[${fn.namespace}]</span> <a href="${formatURL(
+                            fn.path
+                        )}" target="_blank">${fn.name}</a>: ${fn.docs.header}</span><span class="body">${
+                            fn.docs.body
+                        }</body>
                         </div>
                     `
                     }

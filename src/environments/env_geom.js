@@ -10,7 +10,6 @@ import { Sprite } from '../geo/extended/sprite'
 
 /* === OPS === */
 //  area,
-// asPath, // convert shape to Path2D
 // asPolygon, // convert shape to polygon(s)
 // // asPolyline - convert shape to polyline(s)
 // bounds,
@@ -29,6 +28,7 @@ import { Sprite } from '../geo/extended/sprite'
 // tangentAt, // compute tangent at parametric position
 // // transform() - apply transformation matrix
 // translate,
+import { asPath } from '../geo/ops/asPath'
 import { asPoints } from '../geo/ops/asPoints'
 import { centroid } from '../geo/ops/centroid'
 import { offset } from '../geo/ops/offset'
@@ -67,6 +67,10 @@ export function installOnEnv(installFn) {
     })
 
     // ops
+    installFn(asPath, 'geo.ops', 'geo/ops/asPath.js', {
+        header: 'asPath(shape)',
+        body: 'Converts a geometric object to a Path2D object.',
+    })
     installFn(asPoints, 'geo.ops', 'geo/ops/asPoints.js', {
         header: 'asPoints(shape, num)',
         body: "Samples vertices from a given shape's boundary",
