@@ -1,15 +1,14 @@
-function hello() {
-    console.log('Hello World')
+import { installFunctionOnEnv } from '../environments'
+
+import { chaikinCurve } from './chaikin'
+
+const ext = {
+    chaikinCurve: () => {
+        installFunctionOnEnv(chaikinCurve, 'ext', 'extended/chaikin.js', {
+            header: 'chaikinCurve(points, iterations, closed = false)',
+            body: 'Generates a Chaikin curve based on the given points and number of iterations.',
+        })
+    },
 }
 
-// list of installable functions to share to outside world, used as enum
-const installables = {
-    hello,
-}
-
-function extended(...args) {
-    // installs the specified function
-}
-extended.hello = hello
-
-export { extended }
+export { ext }

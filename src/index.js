@@ -1,5 +1,6 @@
 export { env } from './environments/index'
 export { dbg } from './environments/debug'
+export { ext } from './extended/index'
 
 import { installModuleOnEnv } from './environments/index'
 

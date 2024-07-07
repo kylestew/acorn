@@ -6,9 +6,9 @@ export function installEnvInfo(envInfo) {
             return 'https://github.com/kylestew/acorn/blob/ether/src/' + path
         }
     }
-    const modalHTML = `
-    <div id="environmentInfoModal">
-        <div class="modal-content">
+
+    function updateModalContent() {
+        const modalContentHTML = `
             <span class="close">&times;</span>
             <h2>Current Acorn Environment</h2>
             <h5>${JSON.stringify(envInfo, null, 2)}</h5>
@@ -29,14 +29,23 @@ export function installEnvInfo(envInfo) {
                     return ''
                 })
                 .join('')}
-        </div>
-    </div>
-`
+        `
+        document.querySelector('#environmentInfoModal .modal-content').innerHTML = modalContentHTML
 
+        var span = document.getElementsByClassName('close')[0]
+        span.onclick = function () {
+            modal.style.display = 'none'
+        }
+    }
+
+    const modalHTML = `
+        <div id="environmentInfoModal" style="display:none;">
+            <div class="modal-content"></div>
+        </div>
+    `
     document.body.insertAdjacentHTML('beforeend', modalHTML)
 
     var modal = document.getElementById('environmentInfoModal')
-    var span = document.getElementsByClassName('close')[0]
 
     // CMD/CTRL + E to toggle the modal
     document.addEventListener('keydown', function (event) {
@@ -44,14 +53,11 @@ export function installEnvInfo(envInfo) {
             if (modal.style.display === 'block') {
                 modal.style.display = 'none'
             } else {
+                updateModalContent()
                 modal.style.display = 'block'
             }
         }
     })
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = 'none'
-    }
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
         if (event.target == modal) {

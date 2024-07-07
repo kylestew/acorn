@@ -10,6 +10,8 @@
         <script src="../dist/acorn.js"></script>
         <script id="sketch">
             env('sketch-2d', { width: 900, height: 900, range: [-1, 1] })
+            // activate an extended function
+            ext.chaikinCurve()
 
             palette = getPalette()
 
@@ -41,24 +43,23 @@
             )
 
             // smooth out curve one iteration
-            // let smoothPoints = linePointsMoved.map((pts) => chaikinCurve(pts, 2))
-            let smoothPoints = linePointsMoved
+            let smoothPoints = linePointsMoved.map((pts) => chaikinCurve(pts, 2))
 
-            // // second pass of random displacement, smaller values
-            // linePointsMoved = smoothPoints.map((pts) =>
-            //     pts.map((pt) => {
-            //         // (TRICKY BIT)
-            //         // TODO: learn how these work
-            //         // gaussian shaping function
-            //         // only apply on the outsides
-            //         const x = pt[0]
-            //         const gaussShape = 1.0 - Math.exp(-8 * x * x)
-            //         return [pt[0], pt[1] + random(-randomnessSmall, gaussShape * randomnessSmall)]
-            //     })
-            // )
+            // second pass of random displacement, smaller values
+            linePointsMoved = smoothPoints.map((pts) =>
+                pts.map((pt) => {
+                    // (TRICKY BIT)
+                    // TODO: learn how these work
+                    // gaussian shaping function
+                    // only apply on the outsides
+                    const x = pt[0]
+                    const gaussShape = 1.0 - Math.exp(-8 * x * x)
+                    return [pt[0], pt[1] + random(-randomnessSmall, gaussShape * randomnessSmall)]
+                })
+            )
 
-            // // finish smoothing things out
-            // smoothPoints = linePointsMoved.map((pts) => chaikinCurve(pts, 2))
+            // finish smoothing things out
+            smoothPoints = linePointsMoved.map((pts) => chaikinCurve(pts, 2))
 
             // convert to polylines
             clear(palette.background)

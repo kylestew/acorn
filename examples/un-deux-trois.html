@@ -10,8 +10,7 @@
         <script src="../dist/acorn.js"></script>
         <script id="sketch">
             env('sketch-2d', { width: 800, height: 800, range: [-1, 1] })
-
-            displayEnv()
+            const palette = getPalette()
 
             // create a grid of positions
             const cellCount = 24

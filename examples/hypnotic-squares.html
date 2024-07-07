@@ -10,7 +10,7 @@
         <script src="../dist/acorn.js"></script>
         <script id="sketch">
             env('sketch-2d', { width: 900, height: 900, range: [-1, 1] })
-            installEnvInfo()
+            const palette = getPalette()
 
             // create a grid
             const grid = new Grid([-1, -1], [2, 2], 8, 8)
