@@ -130,32 +130,37 @@ randomOffset.docs = {
 }
 export { randomOffset }
 
-// /**
-//  * Generates a random element from a target array based on an array of weights.
-//  *
-//  * @param {Array<any>} targetArray - The array of elements to pick from.
-//  * @param {Array<number>} weights - The array of weights.
-//  * @returns {any} - The selected element from the target array.
-//  * @throws {Error} - If the lengths of the target array and weights array do not match.
-//  */
-// export function weightedRandom(targetArray, weights) {
-//     if (targetArray.length !== weights.length) {
-//         throw new Error('Target array and weights array must have the same length')
-//     }
+/**
+ * Generates a random element from a target array based on an array of weights.
+ *
+ * @param {Array<any>} targetArray - The array of elements to pick from.
+ * @param {Array<number>} weights - The array of weights.
+ * @returns {any} - The selected element from the target array.
+ * @throws {Error} - If the lengths of the target array and weights array do not match.
+ */
+function weightedRandom(targetArray, weights) {
+    if (targetArray.length !== weights.length) {
+        throw new Error('Target array and weights array must have the same length')
+    }
 
-//     const totalWeight = weights.reduce((sum, weight) => sum + weight, 0)
-//     const randomValue = Math.random() * totalWeight
-//     let cumulativeWeight = 0
+    const totalWeight = weights.reduce((sum, weight) => sum + weight, 0)
+    const randomValue = Math.random() * totalWeight
+    let cumulativeWeight = 0
 
-//     for (let i = 0; i < weights.length; i++) {
-//         cumulativeWeight += weights[i]
-//         if (randomValue < cumulativeWeight) {
-//             return targetArray[i]
-//         }
-//     }
+    for (let i = 0; i < weights.length; i++) {
+        cumulativeWeight += weights[i]
+        if (randomValue < cumulativeWeight) {
+            return targetArray[i]
+        }
+    }
 
-//     throw new Error('Unable to determine weighted random index')
-// }
+    throw new Error('Unable to determine weighted random index')
+}
+weightedRandom.docs = {
+    header: 'weightedRandom(targetArray, weights)',
+    body: 'Generates a random element from a target array based on an array of weights.',
+}
+export { weightedRandom }
 
 // // Function to generate a normally distributed random number
 // function boxMullerTransform() {

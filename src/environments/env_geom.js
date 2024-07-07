@@ -18,7 +18,6 @@ import { Sprite } from '../geo/extended/sprite'
 // closestPoint, // find closest point on shape boundary
 // edges, // extract edges
 // // fitIntoBounds() - rescale/reposition shapes into a destination boundary
-// intersects, // pairwise shape intersection (various types)
 // normalAt,
 // pointInside, // check if point inside shape
 // resample, // resample/convert shape
@@ -31,6 +30,7 @@ import { Sprite } from '../geo/extended/sprite'
 import { asPath } from '../geo/ops/asPath'
 import { asPoints } from '../geo/ops/asPoints'
 import { centroid } from '../geo/ops/centroid'
+import { intersects } from '../geo/ops/intersects'
 import { offset } from '../geo/ops/offset'
 import { pointAt } from '../geo/ops/pointAt'
 import { scatter } from '../geo/ops/scatter'
@@ -78,6 +78,10 @@ export function installOnEnv(installFn) {
     installFn(centroid, 'geo.ops', 'geo/ops/centroid.js', {
         header: 'centroid(shape)',
         body: 'Computes centroid (center point) of given shape',
+    })
+    installFn(intersects, 'geo.ops', 'geo/ops/intersects.js', {
+        header: 'intersects(a, b)',
+        body: 'Pairwise shape intersection (various types)',
     })
     installFn(offset, 'geo.ops', 'geo/ops/offset.js', {
         header: 'offset(shape, dist)',
