@@ -587,33 +587,6 @@ export function scale(shape, factor) {
 }
 
 /**
- * Produces `num` random points for which {@link pointInside} succeeds for the
- * given `shape`. Shape must implement `pointInside` and `bounds` methods.
- *
- * @param shape
- * @param num
- */
-export function scatter(shape, num) {
-    const b = bounds(shape)
-    if (!b) return
-
-    const mi = b.pos
-    const mx = b.max
-
-    let out = []
-    while (num-- > 0) {
-        while (true) {
-            const p = randomPoint(mi, mx)
-            if (pointInside(shape, p)) {
-                out.push(p)
-                break
-            }
-        }
-    }
-    return out
-}
-
-/**
  * Splits given shape in 2 parts at normalized parametric position `t`.
  *
  * @param shape

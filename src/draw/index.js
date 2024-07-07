@@ -1,4 +1,5 @@
 import { Circle } from '../geo/shapes/Circle'
+import { Sprite } from '../geo/extended/sprite'
 import { asPath } from '../geo/ops'
 
 export function draw(ctx, geo, attribs = {}) {
@@ -21,6 +22,13 @@ export function draw(ctx, geo, attribs = {}) {
         return
     }
 
+    // Sprites render internally
+    if (geo instanceof Sprite) {
+        geo.draw(ctx)
+        return
+    }
+
+    // NORMAL DRAWING COMMANDS
     ctx.save()
 
     // clear styles

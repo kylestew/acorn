@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles.css" />
+        <title>Human Beans | Acorn</title>
+    </head>
+    <body>
+        <script src="../dist/acorn.js"></script>
+        <script id="sketch">
+            const { ctx } = env('sketch-2d', { width: 900, height: 900, range: [-1, 1] })
+            const palette = getPalette()
+
+            async function sketch() {
+                const sprite = await Sprite.create('assets/footprint.png')
+
+                sprite.color = colorUtil(palette.primary).toArray()
+
+                const rect = new Rectangle([-0.8, -0.8], [1.6, 1.6])
+                // const line = new Line([-1, -1], [1, 1])
+                // const pts = asPoints(line, 24)
+
+                pts = scatter(rect, 64)
+
+                clear(palette.background)
+                pts.forEach((pt) => {
+                    // sprite needs to be draw right away if any scale, position, or rotation is changed
+                    const flipX = randomBool() ? 1.0 : -1.0
+                    const scale = random(0.4, 0.6)
+                    sprite.scale = [flipX * scale, scale]
+                    sprite.pos = pt
+                    sprite.rotation = random(-Math.PI / 3.0, Math.PI / 3.0)
+                    draw(sprite)
+                })
+
+                // TODO:
+                // - vary lightness
+                // - add texture / errors in stamping
+                // - don't re-apply color each stamp
+
+                // sprite.scale = [0.8, 0.8]
+                // // sprite.pos = [0.25, 0.1]
+                // sprite.rotation = Math.PI / 3
+
+                // // TODO: apply a texture mask before drawing
+
+                // draw(sprite)
+            }
+            sketch()
+        </script>
+    </body>
+</html>

@@ -4,7 +4,9 @@ import { Rectangle } from '../geo/shapes/Rectangle'
 import { Circle } from '../geo/shapes/Circle'
 import { Polyline } from '../geo/shapes/Polyline'
 import { Polygon } from '../geo/shapes/Polygon'
+// extended
 import { Grid } from '../geo/extended/grid'
+import { Sprite } from '../geo/extended/sprite'
 
 /* === OPS === */
 //  area,
@@ -23,7 +25,6 @@ import { Grid } from '../geo/extended/grid'
 // resample, // resample/convert shape
 // rotate,
 // scale, // scale shape
-// scatter,
 // splitAt, // split shape/boundary at parametric position
 // tangentAt, // compute tangent at parametric position
 // // transform() - apply transformation matrix
@@ -32,6 +33,7 @@ import { asPoints } from '../geo/ops/asPoints'
 import { centroid } from '../geo/ops/centroid'
 import { offset } from '../geo/ops/offset'
 import { pointAt } from '../geo/ops/pointAt'
+import { scatter } from '../geo/ops/scatter'
 import { withAttribs } from '../geo/ops/withAttribs'
 
 export function installOnEnv(installFn) {
@@ -59,6 +61,10 @@ export function installOnEnv(installFn) {
         header: 'Grid([pos], [size], rows, cols)',
         body: 'A grid object with helper methods.',
     })
+    installFn(Sprite, 'geo', 'geo/extended/sprite.js', {
+        header: 'async Sprite.create(src)',
+        body: 'Creates a new sprite object from an image source (loads async).',
+    })
 
     // ops
     installFn(asPoints, 'geo.ops', 'geo/ops/asPoints.js', {
@@ -76,6 +82,10 @@ export function installOnEnv(installFn) {
     installFn(pointAt, 'geo.ops', 'geo/ops/pointAt.js', {
         header: 'pointAt(shape, t)',
         body: 'Samples a point on the boundary of a shape',
+    })
+    installFn(scatter, 'geo.ops', 'geo/ops/scatter.js', {
+        header: 'scatter(shape, num)',
+        body: 'Produces `num` random points in the given shape.',
     })
     installFn(withAttribs, 'geo.ops', 'geo/ops/withAttribs.js', {
         header: 'withAttribs(shape, attribs)',

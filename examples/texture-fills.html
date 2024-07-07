@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles.css" />
+        <title>Texture Fills | Acorn</title>
+    </head>
+    <body>
+        <script src="../dist/acorn.js"></script>
+        <script></script>
+        <script id="sketch">
+            const { ctx } = env('sketch-2d', { width: 900, height: 900, range: [-1, 1] })
+            const palette = getPalette()
+
+            clear(palette.background)
+
+            // make a clipping rect
+            const rect = new Rectangle([-0.5, -0.5], [1, 1])
+            // save()
+            clip(rect)
+
+            const circ = new Circle([0, 0], 0.75, { fill: palette.secondary })
+            draw(circ)
+            // restore()
+
+            const circ2 = new Circle([0, 0], 0.75, { fill: palette.dark + '33' })
+            draw(circ2)
+            // // TODO: fill the rect
+            // save()
+            // clip()
+            // restore()
+
+            // // ctx.save()
+            // // ctx.clip(rect.path())
+            // // // renderFill(ctx, rect1, FillType.BLOBS, false, 0.5, 0.2, 20, 10)
+
+            // // ctx.restore()
+
+            // draw(rect, { stroke: palette.primary, weight: 0.01 })
+        </script>
+    </body>
+</html>
