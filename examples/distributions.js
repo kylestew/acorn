@@ -45,22 +45,22 @@ function pareto2D(count, xm, alpha) {
     return full(count, () => [pareto(xm[0], alpha[0]), pareto(xm[1], alpha[1])])
 }
 
-// export function noise2D(count, noiseScale, zOffset, noiseFloor) {
-//     const placed = []
-//     while (placed.length < count) {
-//         // get a uniform random point
-//         const [x, y] = uniform2D(1)[0]
+function noise2D(count, noiseScale, zOffset, noiseFloor) {
+    const placed = []
+    while (placed.length < count) {
+        // get a uniform random point in the space
+        const [x, y] = uniform2D(1)[0]
 
-//         // put through noise function to get probability of placement
-//         const probability = mapRange(simplex3(x * noiseScale[0], y * noiseScale[1], zOffset), -1, 1, noiseFloor, 1)
+        // put through noise function to determine probability of placement
+        const probability = mapRange(simplex3(x * noiseScale[0], y * noiseScale[1], zOffset), -1, 1, noiseFloor, 1)
 
-//         // re-roll to see if we actually place the point
-//         if (Math.random() < probability) {
-//             placed.push([x, y])
-//         }
-//     }
-//     return placed
-// }
+        // re-roll with probability to see if we actually place the point
+        if (randomBool(probability)) {
+            placed.push([x, y])
+        }
+    }
+    return placed
+}
 
 env('sketch-2d', { width: 900, height: 900, range: [-1, 1] })
 const palette = getPalette()
@@ -69,7 +69,7 @@ const palette = getPalette()
 const grid = new Grid([-1, -1], [2, 2], 3, 2)
 const rects = grid.rects().map((r) => offset(r, -0.02))
 
-const sampleCount = 25000
+const sampleCount = 25_000
 const color = palette.primary + 'AA'
 const attrs = { fill: color, weight: 0.002 }
 
@@ -88,9 +88,11 @@ draw(remapToRect(pts, rects[3], false), attrs)
 
 // 5) [Gauss, Pareto]
 pts = zip(gaussian1D(sampleCount, 0.5, 0.1), pareto1D(sampleCount, 0.01, 0.1))
-draw(remapToRect(pts, rects[5], false), attrs)
+draw(remapToRect(pts, rects[4], false), attrs)
 
 // 6) NOISE 2D
-// TODO: noise distro - will need simplex noise
-// pts = zip(pareto1D(sampleCount, 0.01, 0.1), uniform1D(sampleCount))
-// draw(remapToRect(pts, rects[4], true), attrs)
+const zOffset = Date.now()
+const noiseScale = [1.4, 1.8]
+const noiseFloor = -0.5
+pts = noise2D(sampleCount, noiseScale, zOffset, noiseFloor)
+draw(remapToRect(pts, rects[5]), attrs)

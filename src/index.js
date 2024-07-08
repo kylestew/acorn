@@ -13,3 +13,6 @@ installModuleOnEnv(arrayLib, 'std.array', 'array/index.js')
 
 import * as randomLib from './random'
 installModuleOnEnv(randomLib, 'std.random', 'random/index.js')
+
+import * as noiseLib from './random/noise'
+installModuleOnEnv(noiseLib, 'std.noise', 'random/noise.js')
