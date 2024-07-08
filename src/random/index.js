@@ -162,34 +162,44 @@ weightedRandom.docs = {
 }
 export { weightedRandom }
 
-// // Function to generate a normally distributed random number
-// function boxMullerTransform() {
-//     let u = 0,
-//         v = 0
-//     while (u === 0) u = Math.random() // Converting [0,1) to (0,1)
-//     while (v === 0) v = Math.random()
-//     let z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v)
-//     return z
-// }
+// Function to generate a normally distributed random number
+function boxMullerTransform() {
+    let u = 0,
+        v = 0
+    while (u === 0) u = Math.random() // Converting [0,1) to (0,1)
+    while (v === 0) v = Math.random()
+    let z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v)
+    return z
+}
 
-// /**
-//  * Calculates a random number from a Gaussian distribution.
-//  *
-//  * @param {number} mean - The mean value of the distribution.
-//  * @param {number} stdDev - The standard deviation of the distribution.
-//  * @returns {number} The random number from the Gaussian distribution.
-//  */
-// export function gaussian(mean, stdDev) {
-//     return mean + stdDev * boxMullerTransform()
-// }
+/**
+ * Calculates a random number from a Gaussian distribution.
+ *
+ * @param {number} mean - The mean value of the distribution.
+ * @param {number} stdDev - The standard deviation of the distribution.
+ * @returns {number} The random number from the Gaussian distribution.
+ */
+function gaussian(mean, stdDev) {
+    return mean + stdDev * boxMullerTransform()
+}
+gaussian.docs = {
+    header: 'gaussian(mean, stdDev)',
+    body: 'Calculates a random number from a Gaussian distribution.',
+}
+export { gaussian }
 
-// /**
-//  * Generates a random number following the Pareto distribution.
-//  * @param {number} xm - The minimum possible value (scale parameter).
-//  * @param {number} alpha - The shape parameter.
-//  * @returns {number} - A random number following the Pareto distribution.
-//  */
-// export function pareto(xm, alpha) {
-//     const uniformRandom = Math.random() // Generates a uniform random number between 0 and 1
-//     return xm / Math.pow(uniformRandom, 1 / alpha)
-// }
+/**
+ * Generates a random number following the Pareto distribution.
+ * @param {number} xm - The minimum possible value (scale parameter).
+ * @param {number} alpha - The shape parameter.
+ * @returns {number} - A random number following the Pareto distribution.
+ */
+function pareto(xm, alpha) {
+    const uniformRandom = Math.random() // Generates a uniform random number between 0 and 1
+    return xm / Math.pow(uniformRandom, 1 / alpha)
+}
+pareto.docs = {
+    header: 'pareto(xm, alpha)',
+    body: 'Generates a random number following the Pareto distribution.',
+}
+export { pareto }

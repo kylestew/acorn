@@ -32,6 +32,7 @@ import { intersects } from '../geo/ops/intersects'
 import { offset } from '../geo/ops/offset'
 import { pointAt } from '../geo/ops/pointAt'
 import { scatter } from '../geo/ops/scatter'
+import { translate } from '../geo/ops/translate'
 import { withAttribs } from '../geo/ops/withAttribs'
 
 export function installOnEnv(installFn) {
@@ -86,6 +87,10 @@ export function installOnEnv(installFn) {
     installFn(scatter, 'geo.ops', 'geo/ops/scatter.js', {
         header: 'scatter(shape, num)',
         body: 'Produces `num` random points in the given shape.',
+    })
+    installFn(translate, 'geo.ops', 'geo/ops/translate.js', {
+        header: 'translate(shape, offset)',
+        body: 'Translates given shape by given `offset` vector.',
     })
     installFn(withAttribs, 'geo.ops', 'geo/ops/withAttribs.js', {
         header: 'withAttribs(shape, attribs)',

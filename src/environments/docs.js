@@ -12,6 +12,7 @@ export function installEnvInfo(envInfo) {
             <span class="close">&times;</span>
             <h2>Current Acorn Environment</h2>
             <h5>${JSON.stringify(envInfo, null, 2)}</h5>
+            <h3>${window.doc_keys.length} functions installed</h3>
             ${window.doc_keys
                 .map((key) => {
                     if (window.hasOwnProperty(key)) {

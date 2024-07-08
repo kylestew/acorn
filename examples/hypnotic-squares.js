@@ -23,8 +23,7 @@ const squares = zip(grid.rects(), randomizedOffsets).map(([rect, randOffset]) =>
         const size = mapRange(pct, 0, 1, 0, cellSize[0] * smallSquarePct)
         const trx = lerpPt([0, 0], randOffset, pct)
         // rect inset by size and translated by lerped offset
-        // const newRect = translate(offset(rect, -size), trx)
-        const newRect = offset(rect, -size)
+        const newRect = translate(offset(rect, -size), trx)
         if (pct > 0.8) {
             return withAttribs(newRect, { stroke: palette.secondary, weight: 0.01 })
         } else {
@@ -32,8 +31,6 @@ const squares = zip(grid.rects(), randomizedOffsets).map(([rect, randOffset]) =>
         }
     })
 )
-
-dbg(squares.length)
 
 clear(palette.background)
 draw(squares, { stroke: palette.primary, weight: 0.01 })
