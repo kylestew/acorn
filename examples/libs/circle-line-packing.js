@@ -1,4 +1,4 @@
-class CircleLinePacking {
+export class CircleLinePacking {
     constructor(obstacles = []) {
         this.obstacles = obstacles
         this.packed = []
