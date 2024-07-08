@@ -4,6 +4,7 @@ import { Rectangle } from '../geo/shapes/Rectangle'
 import { Circle } from '../geo/shapes/Circle'
 import { Polyline } from '../geo/shapes/Polyline'
 import { Polygon } from '../geo/shapes/Polygon'
+import { Quadratic } from '../geo/shapes/Quadratic'
 import { Grid } from '../geo/shapes/Grid'
 
 /* === OPS === */
@@ -53,6 +54,10 @@ export function installOnEnv(installFn) {
     installFn(Polygon, 'geo', 'geo/shapes/Polygon.js', {
         header: 'Polygon(pts, attribs={})',
         body: 'A closed polygon.',
+    })
+    installFn(Quadratic, 'geo', 'geo/shapes/Quadratic.js', {
+        header: 'Quadratic(a, b, c, attribs={})',
+        body: 'Represents a quadratic curve with points `a`, `b`, and `c`.',
     })
     installFn(Grid, 'geo', 'geo/shapes/Grid.js', {
         header: 'Grid([pos], [size], rows, cols)',

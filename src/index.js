@@ -8,6 +8,9 @@ import { installModuleOnEnv } from './environments/index'
 import * as mathLib from './math'
 installModuleOnEnv(mathLib, 'std.math', 'math/index.js')
 
+import * as vectorsLib from './math/vectors'
+installModuleOnEnv(vectorsLib, 'std.vectors', 'math/vectors.js')
+
 import * as arrayLib from './array'
 installModuleOnEnv(arrayLib, 'std.array', 'array/index.js')
 

@@ -3,6 +3,7 @@ import { Rectangle } from '../shapes/Rectangle'
 import { Circle } from '../shapes/Circle'
 import { Polyline } from '../shapes/Polyline'
 import { Polygon } from '../shapes/Polygon'
+import { Quadratic } from '../shapes/Quadratic'
 import { Arc, Ellipse } from '../shapes'
 
 /**
@@ -28,9 +29,10 @@ export function pointAt(shape, t) {
     } else if (shape instanceof Polygon) {
     } else if (shape instanceof Polyline) {
     } else if (shape instanceof Quadratic) {
-        const [start, ctrl, end] = shape.pts
-        const bezier = new Bezier(start[0], start[1], ctrl[0], ctrl[1], end[0], end[1])
-        return [bezier.get(t).x, bezier.get(t).y]
+        throw new Error('need to implement bezier library internally')
+        // const [start, ctrl, end] = shape.pts
+        // const bezier = new Bezier(start[0], start[1], ctrl[0], ctrl[1], end[0], end[1])
+        // return [bezier.get(t).x, bezier.get(t).y]
     } else if (shape instanceof Rectangle) {
     }
     throw new Error(`Method not implemented on ${shape.constructor.name}`)
